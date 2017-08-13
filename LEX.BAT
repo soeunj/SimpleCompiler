@@ -1,0 +1,1 @@
+flex -i -o%1lex.c %1.l 

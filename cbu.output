@@ -1,0 +1,481 @@
+Conflict in state 27 between rule 8 and token ADD resolved as reduce.
+Conflict in state 27 between rule 8 and token SUB resolved as reduce.
+Conflict in state 27 between rule 8 and token MUL resolved as shift.
+Conflict in state 27 between rule 8 and token DIV resolved as shift.
+Conflict in state 27 between rule 8 and token MOD resolved as shift.
+Conflict in state 28 between rule 9 and token ADD resolved as reduce.
+Conflict in state 28 between rule 9 and token SUB resolved as reduce.
+Conflict in state 28 between rule 9 and token MUL resolved as shift.
+Conflict in state 28 between rule 9 and token DIV resolved as shift.
+Conflict in state 28 between rule 9 and token MOD resolved as shift.
+Conflict in state 29 between rule 10 and token ADD resolved as reduce.
+Conflict in state 29 between rule 10 and token SUB resolved as reduce.
+Conflict in state 29 between rule 10 and token MUL resolved as reduce.
+Conflict in state 29 between rule 10 and token DIV resolved as reduce.
+Conflict in state 29 between rule 10 and token MOD resolved as reduce.
+Conflict in state 30 between rule 11 and token ADD resolved as reduce.
+Conflict in state 30 between rule 11 and token SUB resolved as reduce.
+Conflict in state 30 between rule 11 and token MUL resolved as reduce.
+Conflict in state 30 between rule 11 and token DIV resolved as reduce.
+Conflict in state 30 between rule 11 and token MOD resolved as reduce.
+Conflict in state 31 between rule 12 and token ADD resolved as reduce.
+Conflict in state 31 between rule 12 and token SUB resolved as reduce.
+Conflict in state 31 between rule 12 and token MUL resolved as reduce.
+Conflict in state 31 between rule 12 and token DIV resolved as reduce.
+Conflict in state 31 between rule 12 and token MOD resolved as reduce.
+
+Grammar
+rule 1    program -> START stmt_list END
+rule 2    stmt_list -> stmt_list stmt
+rule 3    stmt_list ->		/* empty */
+rule 4    stmt_list -> error STMTEND
+rule 5    stmt -> VAR ID ASSGN expr STMTEND
+rule 6    stmt -> ID ASSGN expr STMTEND
+rule 7    expr ->		/* empty */
+rule 8    expr -> expr ADD expr
+rule 9    expr -> expr SUB expr
+rule 10   expr -> expr MUL expr
+rule 11   expr -> expr DIV expr
+rule 12   expr -> expr MOD expr
+rule 13   expr -> OPEN expr CLOSE
+rule 14   expr -> term
+rule 15   term -> ID
+rule 16   term -> NUM
+
+Terminals, with rules where they appear
+
+$ (-1)
+error (256) 4
+ADD (258) 8
+SUB (259) 9
+VAR (260) 5
+MUL (261) 10
+DIV (262) 11
+MOD (263) 12
+OPEN (264) 13
+CLOSE (265) 13
+ASSGN (266) 5 6
+ID (267) 5 6 15
+NUM (268) 16
+STMTEND (269) 4 5 6
+START (270) 1
+END (271) 1
+
+Nonterminals, with rules where they appear
+
+program (17)
+    on left: 1
+stmt_list (18)
+    on left: 2 3 4, on right: 1 2
+stmt (19)
+    on left: 5 6, on right: 2
+expr (20)
+    on left: 7 8 9 10 11 12 13 14, on right: 5 6 8 9 10 11 12 13
+term (21)
+    on left: 15 16, on right: 14
+
+
+state 0
+
+    START	shift, and go to state 1
+
+    program	go to state 32
+
+
+
+state 1
+
+    program  ->  START . stmt_list END   (rule 1)
+
+    error	shift, and go to state 2
+
+    VAR 	reduce using rule 3 (stmt_list)
+    ID  	reduce using rule 3 (stmt_list)
+    END 	reduce using rule 3 (stmt_list)
+
+    stmt_list	go to state 3
+
+
+
+state 2
+
+    stmt_list  ->  error . STMTEND   (rule 4)
+
+    STMTEND	shift, and go to state 4
+
+
+
+state 3
+
+    program  ->  START stmt_list . END   (rule 1)
+    stmt_list  ->  stmt_list . stmt   (rule 2)
+
+    VAR 	shift, and go to state 5
+    ID  	shift, and go to state 6
+    END 	shift, and go to state 7
+
+    stmt	go to state 8
+
+
+
+state 4
+
+    stmt_list  ->  error STMTEND .   (rule 4)
+
+    $default	reduce using rule 4 (stmt_list)
+
+
+
+state 5
+
+    stmt  ->  VAR . ID ASSGN expr STMTEND   (rule 5)
+
+    ID  	shift, and go to state 9
+
+
+
+state 6
+
+    stmt  ->  ID . ASSGN expr STMTEND   (rule 6)
+
+    ASSGN	shift, and go to state 10
+
+
+
+state 7
+
+    program  ->  START stmt_list END .   (rule 1)
+
+    $default	reduce using rule 1 (program)
+
+
+
+state 8
+
+    stmt_list  ->  stmt_list stmt .   (rule 2)
+
+    $default	reduce using rule 2 (stmt_list)
+
+
+
+state 9
+
+    stmt  ->  VAR ID . ASSGN expr STMTEND   (rule 5)
+
+    ASSGN	shift, and go to state 11
+
+
+
+state 10
+
+    stmt  ->  ID ASSGN . expr STMTEND   (rule 6)
+
+    OPEN	shift, and go to state 12
+    ID  	shift, and go to state 13
+    NUM 	shift, and go to state 14
+
+    $default	reduce using rule 7 (expr)
+
+    expr	go to state 15
+    term	go to state 16
+
+
+
+state 11
+
+    stmt  ->  VAR ID ASSGN . expr STMTEND   (rule 5)
+
+    OPEN	shift, and go to state 12
+    ID  	shift, and go to state 13
+    NUM 	shift, and go to state 14
+
+    $default	reduce using rule 7 (expr)
+
+    expr	go to state 17
+    term	go to state 16
+
+
+
+state 12
+
+    expr  ->  OPEN . expr CLOSE   (rule 13)
+
+    OPEN	shift, and go to state 12
+    ID  	shift, and go to state 13
+    NUM 	shift, and go to state 14
+
+    $default	reduce using rule 7 (expr)
+
+    expr	go to state 18
+    term	go to state 16
+
+
+
+state 13
+
+    term  ->  ID .   (rule 15)
+
+    $default	reduce using rule 15 (term)
+
+
+
+state 14
+
+    term  ->  NUM .   (rule 16)
+
+    $default	reduce using rule 16 (term)
+
+
+
+state 15
+
+    stmt  ->  ID ASSGN expr . STMTEND   (rule 6)
+    expr  ->  expr . ADD expr   (rule 8)
+    expr  ->  expr . SUB expr   (rule 9)
+    expr  ->  expr . MUL expr   (rule 10)
+    expr  ->  expr . DIV expr   (rule 11)
+    expr  ->  expr . MOD expr   (rule 12)
+
+    ADD 	shift, and go to state 19
+    SUB 	shift, and go to state 20
+    MUL 	shift, and go to state 21
+    DIV 	shift, and go to state 22
+    MOD 	shift, and go to state 23
+    STMTEND	shift, and go to state 24
+
+
+
+state 16
+
+    expr  ->  term .   (rule 14)
+
+    $default	reduce using rule 14 (expr)
+
+
+
+state 17
+
+    stmt  ->  VAR ID ASSGN expr . STMTEND   (rule 5)
+    expr  ->  expr . ADD expr   (rule 8)
+    expr  ->  expr . SUB expr   (rule 9)
+    expr  ->  expr . MUL expr   (rule 10)
+    expr  ->  expr . DIV expr   (rule 11)
+    expr  ->  expr . MOD expr   (rule 12)
+
+    ADD 	shift, and go to state 19
+    SUB 	shift, and go to state 20
+    MUL 	shift, and go to state 21
+    DIV 	shift, and go to state 22
+    MOD 	shift, and go to state 23
+    STMTEND	shift, and go to state 25
+
+
+
+state 18
+
+    expr  ->  expr . ADD expr   (rule 8)
+    expr  ->  expr . SUB expr   (rule 9)
+    expr  ->  expr . MUL expr   (rule 10)
+    expr  ->  expr . DIV expr   (rule 11)
+    expr  ->  expr . MOD expr   (rule 12)
+    expr  ->  OPEN expr . CLOSE   (rule 13)
+
+    ADD 	shift, and go to state 19
+    SUB 	shift, and go to state 20
+    MUL 	shift, and go to state 21
+    DIV 	shift, and go to state 22
+    MOD 	shift, and go to state 23
+    CLOSE	shift, and go to state 26
+
+
+
+state 19
+
+    expr  ->  expr ADD . expr   (rule 8)
+
+    OPEN	shift, and go to state 12
+    ID  	shift, and go to state 13
+    NUM 	shift, and go to state 14
+
+    $default	reduce using rule 7 (expr)
+
+    expr	go to state 27
+    term	go to state 16
+
+
+
+state 20
+
+    expr  ->  expr SUB . expr   (rule 9)
+
+    OPEN	shift, and go to state 12
+    ID  	shift, and go to state 13
+    NUM 	shift, and go to state 14
+
+    $default	reduce using rule 7 (expr)
+
+    expr	go to state 28
+    term	go to state 16
+
+
+
+state 21
+
+    expr  ->  expr MUL . expr   (rule 10)
+
+    OPEN	shift, and go to state 12
+    ID  	shift, and go to state 13
+    NUM 	shift, and go to state 14
+
+    $default	reduce using rule 7 (expr)
+
+    expr	go to state 29
+    term	go to state 16
+
+
+
+state 22
+
+    expr  ->  expr DIV . expr   (rule 11)
+
+    OPEN	shift, and go to state 12
+    ID  	shift, and go to state 13
+    NUM 	shift, and go to state 14
+
+    $default	reduce using rule 7 (expr)
+
+    expr	go to state 30
+    term	go to state 16
+
+
+
+state 23
+
+    expr  ->  expr MOD . expr   (rule 12)
+
+    OPEN	shift, and go to state 12
+    ID  	shift, and go to state 13
+    NUM 	shift, and go to state 14
+
+    $default	reduce using rule 7 (expr)
+
+    expr	go to state 31
+    term	go to state 16
+
+
+
+state 24
+
+    stmt  ->  ID ASSGN expr STMTEND .   (rule 6)
+
+    $default	reduce using rule 6 (stmt)
+
+
+
+state 25
+
+    stmt  ->  VAR ID ASSGN expr STMTEND .   (rule 5)
+
+    $default	reduce using rule 5 (stmt)
+
+
+
+state 26
+
+    expr  ->  OPEN expr CLOSE .   (rule 13)
+
+    $default	reduce using rule 13 (expr)
+
+
+
+state 27
+
+    expr  ->  expr . ADD expr   (rule 8)
+    expr  ->  expr ADD expr .   (rule 8)
+    expr  ->  expr . SUB expr   (rule 9)
+    expr  ->  expr . MUL expr   (rule 10)
+    expr  ->  expr . DIV expr   (rule 11)
+    expr  ->  expr . MOD expr   (rule 12)
+
+    MUL 	shift, and go to state 21
+    DIV 	shift, and go to state 22
+    MOD 	shift, and go to state 23
+
+    $default	reduce using rule 8 (expr)
+
+
+
+state 28
+
+    expr  ->  expr . ADD expr   (rule 8)
+    expr  ->  expr . SUB expr   (rule 9)
+    expr  ->  expr SUB expr .   (rule 9)
+    expr  ->  expr . MUL expr   (rule 10)
+    expr  ->  expr . DIV expr   (rule 11)
+    expr  ->  expr . MOD expr   (rule 12)
+
+    MUL 	shift, and go to state 21
+    DIV 	shift, and go to state 22
+    MOD 	shift, and go to state 23
+
+    $default	reduce using rule 9 (expr)
+
+
+
+state 29
+
+    expr  ->  expr . ADD expr   (rule 8)
+    expr  ->  expr . SUB expr   (rule 9)
+    expr  ->  expr . MUL expr   (rule 10)
+    expr  ->  expr MUL expr .   (rule 10)
+    expr  ->  expr . DIV expr   (rule 11)
+    expr  ->  expr . MOD expr   (rule 12)
+
+
+    $default	reduce using rule 10 (expr)
+
+
+
+state 30
+
+    expr  ->  expr . ADD expr   (rule 8)
+    expr  ->  expr . SUB expr   (rule 9)
+    expr  ->  expr . MUL expr   (rule 10)
+    expr  ->  expr . DIV expr   (rule 11)
+    expr  ->  expr DIV expr .   (rule 11)
+    expr  ->  expr . MOD expr   (rule 12)
+
+
+    $default	reduce using rule 11 (expr)
+
+
+
+state 31
+
+    expr  ->  expr . ADD expr   (rule 8)
+    expr  ->  expr . SUB expr   (rule 9)
+    expr  ->  expr . MUL expr   (rule 10)
+    expr  ->  expr . DIV expr   (rule 11)
+    expr  ->  expr . MOD expr   (rule 12)
+    expr  ->  expr MOD expr .   (rule 12)
+
+
+    $default	reduce using rule 12 (expr)
+
+
+
+state 32
+
+    $   	go to state 33
+
+
+
+state 33
+
+    $   	go to state 34
+
+
+
+state 34
+
+    $default	accept
